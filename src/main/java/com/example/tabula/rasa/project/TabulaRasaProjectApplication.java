@@ -8,6 +8,7 @@ public class TabulaRasaProjectApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(TabulaRasaProjectApplication.class, args);
+		// test
 	}
 
 }
