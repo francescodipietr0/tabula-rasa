@@ -14,7 +14,6 @@ public class ProductService {
 
     @Autowired
     ProductDAO productDAO;
-
     @Autowired
     ProductMapper productMapper;
 
@@ -24,6 +23,22 @@ public class ProductService {
 
     public List<ProductDTO> getAllProducts() {
         return productMapper.toDtoList(productDAO.findAll());
+    }
+
+    public ProductDTO insertProduct(ProductDTO product) {
+        return productMapper.toDto(productDAO.save(productMapper.toEntity((product))));
+    }
+
+    public ProductDTO updateProduct(Long id, ProductDTO product) {
+
+        productDAO.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Prodotto non trovato con ID: " + id));
+
+        return productMapper.toDto(productDAO.save(productMapper.toEntity(product)));
+    }
+
+    public void deleteProduct(Long id) {
+        productDAO.deleteById(id);
     }
 
 }
